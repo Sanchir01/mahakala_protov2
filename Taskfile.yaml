@@ -1,0 +1,15 @@
+version: "3"
+
+tasks:
+  generate:
+    aliases:
+      - go
+    desc: "Generate code from proto files"
+    cmds:
+      - protoc -I proto proto/order/*.proto --go_out=./gen/go/ --go_opt=paths=source_relative --go-grpc_out=./gen/go/ --go-grpc_opt=paths=source_relative
+  python:
+    aliases:
+      - py
+    desc: "Generate code python"
+    cmds:
+      - uv run python -m grpc_tools.protoc -I=proto --python_out=./gen/python --grpc_python_out=./gen/python proto/**/*.proto
